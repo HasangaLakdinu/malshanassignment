@@ -1,0 +1,165 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Tharindu's Note Application API",
+      "description": "This is Tharindu malshan's Note Application API Documentation for UX teams",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:4000",
+    "basePath": "/api/",
+    "tags": [
+      {
+        "name": "Notes",
+        "description": "API for notes in the system"
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/Notes": {
+        "post": {
+          "tags": [
+            "Notes"
+          ],
+          "description": "Create new note in system",
+          "parameters": [
+            {
+              "name": "note",
+              "in": "body",
+              "description": "note that we want to create",
+              "schema": {
+                "$ref": "#/definitions/note"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "New note is created",
+              "schema": {
+                "$ref": "#/definitions/note"
+              }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "Notes"
+          ],
+          "summary": "Get all Notes in system",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Notes"
+              }
+            }
+          }
+        }
+      },
+      "/Notes/{noteId}": {
+        "parameters": [
+          {
+            "name": "noteId",
+            "in": "path",
+            "required": true,
+            "description": "ID of note that we want to find",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": [
+            "Notes"
+          ],
+          "summary": "Get note with given ID",
+          "responses": {
+            "200": {
+              "description": "note is found",
+              "schema": {
+                "$ref": "#/definitions/note"
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete note with given ID",
+          "tags": [
+            "Notes"
+          ],
+          "responses": {
+            "200": {
+              "description": "note is deleted",
+              "schema": {
+                "$ref": "#/definitions/note"
+              }
+            }
+          }
+        },
+        "put": {
+          "summary": "Update note with give ID",
+          "tags": [
+            "Notes"
+          ],
+          "parameters": [
+            {
+              "name": "note",
+              "in": "body",
+              "description": "note with new values of properties",
+              "schema": {
+                "$ref": "#/definitions/note"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "note is updated",
+              "schema": {
+                "$ref": "#/definitions/note"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "note": {
+        "required": [
+          "email",
+          "_id"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "email": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          }
+        }
+      },
+      "Notes": {
+        "type": "array",
+        "$ref": "#/definitions/note"
+      }
+    }
+  }
