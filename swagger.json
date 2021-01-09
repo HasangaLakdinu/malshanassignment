@@ -27,7 +27,7 @@
       "application/json"
     ],
     "paths": {
-      "/Notes": {
+      "/note": {
         "post": {
           "tags": [
             "Notes"
@@ -54,7 +54,9 @@
               }
             }
           }
-        },
+        }
+      },
+      "/notes": {
         "get": {
           "tags": [
             "Notes"
@@ -64,13 +66,45 @@
             "200": {
               "description": "OK",
               "schema": {
-                "$ref": "#/definitions/Notes"
+                "$ref": "#/definitions/note"
               }
             }
           }
         }
       },
-      "/Notes/{noteId}": {
+      "/archivednotes": {
+        "get": {
+          "tags": [
+            "Notes"
+          ],
+          "summary": "Get all Archived Notes",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/note"
+              }
+            }
+          }
+        }
+      },
+      "/notarchivednotes": {
+        "get": {
+          "tags": [
+            "Notes"
+          ],
+          "summary": "Get all Un Archived Notes",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/note"
+              }
+            }
+          }
+        }
+      },
+      "/note/{noteId}": {
         "parameters": [
           {
             "name": "noteId",
@@ -137,29 +171,20 @@
     "definitions": {
       "note": {
         "required": [
-          "email",
-          "_id"
+          "Title"
         ],
         "properties": {
-          "_id": {
+          "Title": {
             "type": "string",
             "uniqueItems": true
           },
-          "email": {
-            "type": "string",
-            "uniqueItems": true
-          },
-          "lastName": {
+          "Description": {
             "type": "string"
           },
-          "firstName": {
-            "type": "string"
+          "archived": {
+            "type": "boolean"
           }
         }
-      },
-      "Notes": {
-        "type": "array",
-        "$ref": "#/definitions/note"
       }
     }
   }

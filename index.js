@@ -13,18 +13,17 @@ mongoose.Promise=global.Promise;
 
 app.use(bodyParser.json());
 
+//
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //initialize route
-app.use('/api',require('./routes/api'));
+app.use('/api',require('./routes/noteapi'));
 
 //error handling middlewear
-app.use(function(err,req,res,next){
+app.use((err,req,res,next)=>{
  res.status(422).send({error:err.message});
 });
 
 
 //listen for requests
-app.listen(process.env.port||4000,function(){
-  console.log('now listening for requests');
-});
+app.listen(process.env.port||4000,()=>console.log('now listening for requests'));
